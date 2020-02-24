@@ -17,7 +17,7 @@ export default {
       path: 'erp-content',
       component: RouteWrapper,
       children: [
-        { path: '', redirect: 'categories' },
+        { path: '', redirect: 'products' },
         { path: 'categories', component: Categories },
         { path: 'products', component: Products }
       ]
