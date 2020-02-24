@@ -15,7 +15,7 @@ export default {
   name: "Products",
   computed: {
     items() {
-      return [];
+      return this.$store.state.settings.products;
     }
   },
   mounted() {
