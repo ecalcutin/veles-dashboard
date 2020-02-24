@@ -4,6 +4,8 @@ import VueRouter from 'vue-router';
 import RouteWrapper from '@/components/RouteWrapper';
 import AuthorizedLayout from '@/views/layouts/AuthorizedLayout';
 
+import SettingsRoutes from '@/views/settings/routes';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -15,7 +17,7 @@ const routes = [
       {
         path: 'dashboard',
         component: AuthorizedLayout,
-        children: []
+        children: [SettingsRoutes]
       }
     ]
   }
