@@ -1,6 +1,7 @@
 <template>
   <div>
     <AppBar />
+    <SidenavBar />
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -9,10 +10,12 @@
 
 <script>
 import AppBar from "@/components/AppBar";
+import SidenavBar from "@/components/SidenavBar";
 export default {
   name: "AuthorizedLaout",
   components: {
-    AppBar
+    AppBar,
+    SidenavBar
   }
 };
 </script>
