@@ -10,12 +10,16 @@
 </template>
 
 <script>
+import { SETTINGS_PRODUCTS_GET } from "@/store/settings/action-types";
 export default {
   name: "Products",
   computed: {
     items() {
       return [];
     }
+  },
+  mounted() {
+    this.$store.dispatch(SETTINGS_PRODUCTS_GET);
   }
 };
 </script>
