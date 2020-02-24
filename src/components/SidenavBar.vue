@@ -7,6 +7,11 @@
           <v-list-item-title>Главная</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
+      <v-list-item-group>
+        <v-list-item to="/dashboard/settings">
+          <v-list-item-title>Настройки</v-list-item-title>
+        </v-list-item>
+      </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
 </template>
