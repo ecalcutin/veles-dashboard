@@ -1,0 +1,1 @@
+export const UI_SIDENAV_TOGGLED = '[UI] - SIDENAV TOGGLED';
