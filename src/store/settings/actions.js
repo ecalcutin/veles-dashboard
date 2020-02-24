@@ -1,8 +1,11 @@
+import api from '@/plugins/api';
+
 import * as actionTypes from './action-types';
 import * as mutationTypes from './mutation-types';
 
 export default {
-  [actionTypes.SETTINGS_PRODUCTS_GET]({ commit }) {
-    commit(mutationTypes.SETTINGS_PRODUCTS_SET);
+  async [actionTypes.SETTINGS_PRODUCTS_GET]({ commit }) {
+    const { data: products } = await api.get('/products');
+    commit(mutationTypes.SETTINGS_PRODUCTS_SET, products);
   }
 };
