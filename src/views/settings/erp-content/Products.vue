@@ -15,8 +15,11 @@
 </template>
 
 <script>
-import { SETTINGS_PRODUCTS_GET } from "@/store/settings/action-types";
-import { SETTINGS_PRODUCTS_ITEMS_PER_PAGE_CHANGE, SETTINGS_PRODUCTS_PAGE_CHANGE } from "@/store/settings/mutation-types";
+import { PRODUCTS_GET } from "@/store/settings/action-types";
+import {
+  PAGE_LIMIT_SET,
+  PAGE_INDEX_SET
+} from "@/store/settings/mutation-types";
 export default {
   name: "Products",
   computed: {
@@ -31,21 +34,22 @@ export default {
         return this.$store.state.settings.products.pagination.page;
       },
       set(index) {
-        this.$store.commit(SETTINGS_PRODUCTS_PAGE_CHANGE, index);
-        this.$store.dispatch(SETTINGS_PRODUCTS_GET);
+        this.$store.commit(PAGE_INDEX_SET, index);
+        this.$store.dispatch(PRODUCTS_GET);
       }
     },
     itemsPerPage: {
       get() {
         return this.$store.state.settings.products.pagination.itemsPerPage;
       },
-      set(cound) {
-        console.log("Setting unit");
-        this.$store.commit(SETTINGS_PRODUCTS_ITEMS_PER_PAGE_CHANGE, cound);
-        this.$store.dispatch(SETTINGS_PRODUCTS_GET);
+      set(limit) {
+        this.$store.commit(PAGE_LIMIT_SET, limit);
+        this.$store.dispatch(PRODUCTS_GET);
       }
     }
   },
-  mounted() {}
+  mounted() {
+    this.$store.dispatch(PRODUCTS_GET);
+  }
 };
 </script>

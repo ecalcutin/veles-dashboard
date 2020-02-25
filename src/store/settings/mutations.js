@@ -1,16 +1,14 @@
 import * as mutationTypes from './mutation-types';
 
 export default {
-  [mutationTypes.SETTINGS_PRODUCTS_SET](state, paginatedData) {
-    state.products.items = paginatedData.docs;
-    state.products.pagination.totalDocs = paginatedData.totalDocs;
+  [mutationTypes.PRODUCTS_SET](state, { products, totalDocs }) {
+    state.products.items = products;
+    state.products.pagination.totalDocs = totalDocs;
   },
-  [mutationTypes.SETTINGS_PRODUCTS_PAGE_CHANGE](state, page) {
-    // state.products.pagination.page = page;
+  [mutationTypes.PAGE_INDEX_SET](state, page) {
     state.products.pagination.page = page;
   },
-  [mutationTypes.SETTINGS_PRODUCTS_ITEMS_PER_PAGE_CHANGE](state, itemsPerPage) {
-    // state.products.pagination.page = page;
-    state.products.pagination.itemsPerPage = itemsPerPage;
+  [mutationTypes.PAGE_LIMIT_SET](state, limit) {
+    state.products.pagination.itemsPerPage = limit;
   }
 };
