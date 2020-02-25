@@ -5,6 +5,7 @@
         <v-btn text>Добавить</v-btn>
       </v-toolbar>
       <v-data-table
+        :headers="headers"
         :server-items-length="totalDocs"
         :items-per-page.sync="itemsPerPage"
         :page.sync="page"
@@ -22,6 +23,19 @@ import {
 } from "@/store/settings/mutation-types";
 export default {
   name: "Products",
+  data() {
+    return {
+      headers: [
+        { text: "UUID", value: "_id", sortable: false },
+        { text: "Артикул", value: "title", sortable: false },
+        { text: "Image URI", value: "imageURI", sortable: false }
+      ]
+    };
+  },
+  mounted() {
+    this.$store.dispatch(PRODUCTS_GET);
+  },
+  methods: {},
   computed: {
     items() {
       return this.$store.state.settings.products.items;
@@ -47,9 +61,6 @@ export default {
         this.$store.dispatch(PRODUCTS_GET);
       }
     }
-  },
-  mounted() {
-    this.$store.dispatch(PRODUCTS_GET);
   }
 };
 </script>
