@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       crud: {
-        opened: true,
+        opened: false,
         mode: "create"
       },
       defaultItem: {
