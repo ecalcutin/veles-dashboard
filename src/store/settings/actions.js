@@ -12,5 +12,9 @@ export default {
     const products = response.data.docs;
     const totalDocs = response.data.totalDocs;
     commit(mutationTypes.PRODUCTS_SET, { products, totalDocs });
+  },
+  async [actionTypes.PRODUCT_REMOVE]({ dispatch }, id) {
+    await api.delete(`/products/${id}`);
+    dispatch(actionTypes.PRODUCTS_GET);
   }
 };

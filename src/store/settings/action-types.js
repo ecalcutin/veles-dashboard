@@ -1,1 +1,2 @@
 export const PRODUCTS_GET = '[SETTINGS] - PRODUCTS/GET';
+export const PRODUCT_REMOVE = '[SETTINGS] - PRODUCT/REMOVE';

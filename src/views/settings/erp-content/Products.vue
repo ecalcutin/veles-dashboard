@@ -37,7 +37,7 @@
 
 <script>
 import CrudDialog from "./CrudDialog";
-import { PRODUCTS_GET } from "@/store/settings/action-types";
+import { PRODUCTS_GET, PRODUCT_REMOVE } from "@/store/settings/action-types";
 import {
   PAGE_LIMIT_SET,
   PAGE_INDEX_SET
@@ -84,7 +84,7 @@ export default {
           console.log("Updating: ", this.defaultItem);
           break;
         case "remove":
-          console.log("Removing");
+          this.$store.dispatch(PRODUCT_REMOVE, this.defaultItem._id);
           break;
         case "cancel":
           console.log("Cancelling");
