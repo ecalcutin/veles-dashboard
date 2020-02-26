@@ -7,6 +7,7 @@
           <template>
             <v-form>
               <v-text-field label="UUID" v-model="defaultItem._id" />
+              <v-text-field label="Артикул" v-model="defaultItem.title" />
             </v-form>
           </template>
         </CrudDialog>
