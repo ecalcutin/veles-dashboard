@@ -16,5 +16,15 @@ export default {
   async [actionTypes.PRODUCT_REMOVE]({ dispatch }, id) {
     await api.delete(`/products/${id}`);
     dispatch(actionTypes.PRODUCTS_GET);
+  },
+  async [actionTypes.PRODUCT_CREATE]({ dispatch }, product) {
+    const fd = new FormData();
+    for (let key in product) {
+      fd.append(key, product[key]);
+    }
+    await api.post('/products', fd, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    dispatch(actionTypes.PRODUCTS_GET);
   }
 };

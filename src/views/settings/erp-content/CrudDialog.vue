@@ -8,7 +8,6 @@
         </v-card-title>
         <v-card-text>
           <v-container>
-            {{mode}}
             <slot></slot>
           </v-container>
         </v-card-text>

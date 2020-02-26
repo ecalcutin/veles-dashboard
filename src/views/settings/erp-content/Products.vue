@@ -6,8 +6,12 @@
         <CrudDialog @onClose="onClose" :mode="crud.mode" :opened="crud.opened">
           <template>
             <v-form>
-              <v-text-field label="UUID" v-model="defaultItem._id" />
               <v-text-field label="Артикул" v-model="defaultItem.title" />
+              <v-file-input
+                v-if="!defaultItem.imageURI"
+                v-model="defaultItem.image"
+                label="Изображение"
+              />
             </v-form>
           </template>
         </CrudDialog>
@@ -38,7 +42,11 @@
 
 <script>
 import CrudDialog from "./CrudDialog";
-import { PRODUCTS_GET, PRODUCT_REMOVE } from "@/store/settings/action-types";
+import {
+  PRODUCTS_GET,
+  PRODUCT_REMOVE,
+  PRODUCT_CREATE
+} from "@/store/settings/action-types";
 import {
   PAGE_LIMIT_SET,
   PAGE_INDEX_SET
@@ -55,9 +63,8 @@ export default {
         mode: "create"
       },
       defaultItem: {
-        _id: "",
         title: "",
-        imageURI: ""
+        image: null
       },
       headers: [
         { text: "UUID", value: "_id", sortable: false },
@@ -79,7 +86,7 @@ export default {
     onClose(mode) {
       switch (mode) {
         case "create":
-          console.log("Creating: ", this.defaultItem);
+          this.$store.dispatch(PRODUCT_CREATE, this.defaultItem);
           break;
         case "update":
           console.log("Updating: ", this.defaultItem);
@@ -93,9 +100,8 @@ export default {
       }
       this.crud.opened = false;
       this.defaultItem = {
-        _id: "",
         title: "",
-        imageURI: ""
+        image: null
       };
     }
   },
