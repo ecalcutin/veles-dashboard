@@ -6,18 +6,16 @@ import Products from './erp-content/Products';
 
 export default {
   path: 'settings',
-  component: SettingsPage,
+  component: RouteWrapper,
   children: [
     {
       path: '',
-      component: RouteWrapper,
-      redirect: 'erp-content'
+      component: SettingsPage
     },
     {
       path: 'erp-content',
       component: RouteWrapper,
       children: [
-        { path: '', redirect: 'products' },
         { path: 'categories', component: Categories },
         { path: 'products', component: Products }
       ]
