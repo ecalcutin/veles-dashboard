@@ -7,11 +7,6 @@
           <template>
             <v-form>
               <v-text-field label="Артикул" v-model="defaultItem.title" />
-              <v-file-input
-                v-if="!defaultItem.imageURI"
-                v-model="defaultItem.image"
-                label="Изображение"
-              />
             </v-form>
           </template>
         </CrudDialog>
@@ -27,7 +22,6 @@
           <tr>
             <td>{{row.item._id}}</td>
             <td>{{row.item.title}}</td>
-            <td>{{row.item.imageURI}}</td>
             <td>
               <v-btn @click.stop="openCrudDialog('update', row.item)" icon small>
                 <v-icon dark>mdi-pencil-outline</v-icon>
@@ -69,7 +63,6 @@ export default {
       headers: [
         { text: "UUID", value: "_id", sortable: false },
         { text: "Артикул", value: "title", sortable: false },
-        { text: "Image URI", value: "imageURI", sortable: false },
         { text: "Действия", sortable: false }
       ]
     };
@@ -101,7 +94,6 @@ export default {
       this.crud.opened = false;
       this.defaultItem = {
         title: "",
-        image: null
       };
     }
   },
