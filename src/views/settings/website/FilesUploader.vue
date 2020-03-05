@@ -1,17 +1,23 @@
 <template>
   <div>
     <v-form ref="form">
-      <v-file-input
-        :rules="rules"
-        chips
-        accept="image/*"
-        show-size
-        counter
-        v-model="files"
-        multiple
-        label="Выберите файлы"
-      ></v-file-input>
-      <v-btn :disabled="files.length === 0" @click="upload">Загрузить</v-btn>
+      <v-row align="center">
+        <v-col class="flex-grow-1">
+          <v-file-input
+            :rules="rules"
+            chips
+            accept="image/*"
+            show-size
+            counter
+            v-model="files"
+            multiple
+            label="Выберите файлы"
+          ></v-file-input>
+        </v-col>
+        <v-col class="flex-grow-0">
+          <v-btn :disabled="files.length === 0 || files.length > 10" @click="upload">Загрузить</v-btn>
+        </v-col>
+      </v-row>
     </v-form>
     <v-progress-linear v-if="uploading" v-model="progress" />
   </div>

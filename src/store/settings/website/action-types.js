@@ -1,0 +1,1 @@
+export const IMAGES_GET = '[WEBSITE] - IMAGES/GET';

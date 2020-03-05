@@ -4,6 +4,28 @@
       <v-row>
         <v-col>
           <FilesUploader />
+          <v-data-iterator
+            :server-items-length="totalDocs"
+            :items-per-page.sync="itemsPerPage"
+            :page.sync="page"
+            :items="items"
+          >
+            <template v-slot:default="props">
+              <v-row>
+                <v-col v-for="item in props.items" :key="item._id" cols="12" sm="6" md="4">
+                  <v-card>
+                    <v-img></v-img>
+                    <v-card-title>{{item._id}}</v-card-title>
+                    <v-card-text>
+                      <v-row></v-row>
+                      <div class="my-4 subtitle-1">{{item._id}}</div>
+                      <div class="my-4 subtitle-1">{{item.imageURI}}</div>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </template>
+          </v-data-iterator>
         </v-col>
       </v-row>
     </div>
@@ -11,6 +33,11 @@
 </template>
 
 <script>
+import { IMAGES_GET } from "@/store/settings/website/action-types";
+import {
+  PAGE_LIMIT_SET,
+  PAGE_INDEX_SET
+} from "@/store/settings/website/mutation-types";
 import FilesUploader from "./FilesUploader";
 export default {
   name: "WebsiteImages",
@@ -18,8 +45,40 @@ export default {
     FilesUploader
   },
   data() {
-    return {};
+    return {
+      tab: null
+    };
   },
-  methods: {}
+  methods: {},
+  mounted() {
+    this.$store.dispatch(IMAGES_GET);
+  },
+  computed: {
+    items() {
+      return this.$store.state.settings.website.images.items;
+    },
+    totalDocs() {
+      return this.$store.state.settings.website.images.pagination.totalDocs;
+    },
+    page: {
+      get() {
+        return this.$store.state.settings.website.images.pagination.page;
+      },
+      set(index) {
+        this.$store.commit(PAGE_INDEX_SET, index);
+        this.$store.dispatch(IMAGES_GET);
+      }
+    },
+    itemsPerPage: {
+      get() {
+        return this.$store.state.settings.website.images.pagination
+          .itemsPerPage;
+      },
+      set(limit) {
+        this.$store.commit(PAGE_LIMIT_SET, limit);
+        this.$store.dispatch(IMAGES_GET);
+      }
+    }
+  }
 };
 </script>
