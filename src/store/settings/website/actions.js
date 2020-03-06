@@ -21,5 +21,9 @@ export default {
       category,
       isPublished
     });
-  }
+  },
+  async [actionTypes.IMAGE_REMOVE]({ dispatch }, id) {
+    await api.delete(`/website/images/${id}`);
+    dispatch(actionTypes.IMAGES_GET);
+  },
 };

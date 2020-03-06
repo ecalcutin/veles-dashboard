@@ -51,6 +51,7 @@
 import CrudDialog from "../erp-content/CrudDialog";
 import {
   IMAGES_GET,
+  IMAGE_REMOVE,
   IMAGE_DATA_UPDATE
 } from "@/store/settings/website/action-types";
 import {
@@ -90,7 +91,7 @@ export default {
           this.$store.dispatch(IMAGE_DATA_UPDATE, this.defaultItem);
           break;
         case "remove":
-          this.$store.dispatch(CATEGORY_REMOVE, this.defaultItem._id);
+          this.$store.dispatch(IMAGE_REMOVE, this.defaultItem._id);
           break;
         case "cancel":
           console.log("Cancelling");
