@@ -17,9 +17,15 @@
                     <v-img height="400" :src="`${uploads}/${item.imageURI}`"></v-img>
                     <v-card-title>{{item._id}}</v-card-title>
                     <v-card-text>
-                      <v-row></v-row>
-                      <div class="my-4 subtitle-1">{{item._id}}</div>
-                      <div class="my-4 subtitle-1">{{item.imageURI}}</div>
+                      <v-form>
+                        <v-select
+                          :items="categories"
+                          return-object
+                          item-text="title"
+                          item-value="_id"
+                        />
+                        <v-text-field label="Артикул" />
+                      </v-form>
                     </v-card-text>
                     <v-card-actions>
                       <v-btn
@@ -71,6 +77,9 @@ export default {
     this.$store.dispatch(IMAGES_GET);
   },
   computed: {
+    categories() {
+      return this.$store.state.settings.categories;
+    },
     items() {
       return this.$store.state.settings.website.images.items;
     },
