@@ -28,6 +28,10 @@
                               label="Категория"
                               v-model="defaultItem.category"
                             />
+                            <v-radio-group v-model="defaultItem.isPublished">
+                              <v-radio label="Показывать" :value="true"></v-radio>
+                              <v-radio label="Не показывать" :value="false"></v-radio>
+                            </v-radio-group>
                           </v-form>
                         </template>
                       </CrudDialog>
