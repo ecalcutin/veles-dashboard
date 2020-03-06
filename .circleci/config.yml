@@ -1,0 +1,62 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:13.8.0
+
+    working_directory: ~/veles-dashboard
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: npm test
+
+  deploy-to-testing:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploying to testing
+          command: ssh ${user}@${host_testing} "mkdir -p ~/veles-dashboard; cd ~/veles-dashboard; git pull; npm i; npm run build;"
+
+  deploy-to-production:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploying to production
+          command: ssh ${user}@${host_production} "mkdir -p ~/veles-dashboard; cd ~/veles-dashboard; git pull; npm i; npm run build;"
+
+
+
+workflows:
+  version: 2
+  deploy-to-vps:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - develop
+                - master
+      - deploy-to-testing:
+          requires:
+            - test
+          filters:
+            branches:
+              only: develop
+      - deploy-to-production:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
