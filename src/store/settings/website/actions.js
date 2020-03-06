@@ -14,8 +14,12 @@ export default {
     commit(mutationTypes.IMAGES_SET, { images, totalDocs });
   },
 
-  async [actionTypes.IMAGE_TOGGLE_PUBLISH]({ commit, state }, { id, publishOption }) {
-    const response = await api.patch(`/website/images/${id}/publish`, { publishOption });
-    commit(mutationTypes.IMAGE_PUBLISH_TOGGLED, response.data)
+  async [actionTypes.IMAGE_DATA_UPDATE]({ }, imageData) {
+    const { title, category, isPublished, _id } = imageData;
+    const response = await api.patch(`/website/images/${_id}`, {
+      title,
+      category,
+      isPublished
+    });
   }
 };

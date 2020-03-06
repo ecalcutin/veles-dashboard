@@ -17,22 +17,24 @@
                     <v-img height="400" :src="`${uploads}/${item.imageURI}`"></v-img>
                     <v-card-title>{{item._id}}</v-card-title>
                     <v-card-text>
-                      <v-form>
-                        <v-select
-                          :items="categories"
-                          return-object
-                          item-text="title"
-                          item-value="_id"
-                        />
-                        <v-text-field label="Артикул" />
-                      </v-form>
+                      <CrudDialog @onClose="onClose" :mode="crud.mode" :opened="crud.opened">
+                        <template>
+                          <v-form>
+                            <v-text-field label="Название" v-model="defaultItem.title" />
+                            <v-select
+                              :items="categories"
+                              item-text="title"
+                              item-value="_id"
+                              label="Категория"
+                              v-model="defaultItem.category"
+                            />
+                          </v-form>
+                        </template>
+                      </CrudDialog>
                     </v-card-text>
                     <v-card-actions>
-                      <v-btn
-                        text
-                        @click="togglePublished(item)"
-                      >{{`${item.isPublished ? 'Не показывать' :'Опубликовать'}`}}</v-btn>
-                      <v-btn text>Удалить</v-btn>
+                      <v-spacer />
+                      <v-btn @click.stop="openCrudDialog('update', item)" text>Редактировать</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-col>
@@ -46,9 +48,10 @@
 </template>
 
 <script>
+import CrudDialog from "../erp-content/CrudDialog";
 import {
   IMAGES_GET,
-  IMAGE_TOGGLE_PUBLISH
+  IMAGE_DATA_UPDATE
 } from "@/store/settings/website/action-types";
 import {
   PAGE_LIMIT_SET,
@@ -58,19 +61,47 @@ import FilesUploader from "./FilesUploader";
 export default {
   name: "WebsiteImages",
   components: {
-    FilesUploader
+    FilesUploader,
+    CrudDialog
   },
   data() {
     return {
-      tab: null
+      tab: null,
+      crud: {
+        opened: false,
+        mode: "create"
+      },
+      defaultItem: {
+        title: "",
+        category: "",
+        isPublished: false
+      }
     };
   },
   methods: {
-    togglePublished(item) {
-      this.$store.dispatch(IMAGE_TOGGLE_PUBLISH, {
-        id: item._id,
-        publishOption: !item.isPublished
-      });
+    openCrudDialog(mode, item) {
+      this.defaultItem = Object.assign({}, item);
+      this.crud.mode = mode;
+      this.crud.opened = true;
+    },
+    onClose(mode) {
+      switch (mode) {
+        case "update":
+          this.$store.dispatch(IMAGE_DATA_UPDATE, this.defaultItem);
+          break;
+        case "remove":
+          this.$store.dispatch(CATEGORY_REMOVE, this.defaultItem._id);
+          break;
+        case "cancel":
+          console.log("Cancelling");
+          break;
+      }
+      this.crud.opened = false;
+      this.defaultItem = {
+        title: "",
+        category: "",
+        isPublished: false
+      };
     }
   },
   mounted() {
