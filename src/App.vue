@@ -12,6 +12,9 @@ export default {
 
   data: () => ({
     //
-  })
+  }),
+  mounted() {
+    this.$store.dispatch("__APP_INIT__");
+  }
 };
 </script>
