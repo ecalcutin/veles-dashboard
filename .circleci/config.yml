@@ -42,21 +42,11 @@ workflows:
   version: 2
   deploy-to-vps:
     jobs:
-      - test:
-          filters:
-            branches:
-              only:
-                - develop
-                - master
       - deploy-to-testing:
-          requires:
-            - test
           filters:
             branches:
               only: develop
       - deploy-to-production:
-          requires:
-            - test
           filters:
             branches:
               only: master
