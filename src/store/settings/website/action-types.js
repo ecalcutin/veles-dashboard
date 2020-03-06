@@ -1,1 +1,3 @@
 export const IMAGES_GET = '[WEBSITE] - IMAGES/GET';
+
+export const IMAGE_TOGGLE_PUBLISH = '[WEBSITE] - IMAGE/TOGGLE_PUBLISH';

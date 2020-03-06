@@ -21,6 +21,13 @@
                       <div class="my-4 subtitle-1">{{item._id}}</div>
                       <div class="my-4 subtitle-1">{{item.imageURI}}</div>
                     </v-card-text>
+                    <v-card-actions>
+                      <v-btn
+                        text
+                        @click="togglePublished(item)"
+                      >{{`${item.isPublished ? 'Не показывать' :'Опубликовать'}`}}</v-btn>
+                      <v-btn text>Удалить</v-btn>
+                    </v-card-actions>
                   </v-card>
                 </v-col>
               </v-row>
@@ -33,7 +40,10 @@
 </template>
 
 <script>
-import { IMAGES_GET } from "@/store/settings/website/action-types";
+import {
+  IMAGES_GET,
+  IMAGE_TOGGLE_PUBLISH
+} from "@/store/settings/website/action-types";
 import {
   PAGE_LIMIT_SET,
   PAGE_INDEX_SET
@@ -49,7 +59,14 @@ export default {
       tab: null
     };
   },
-  methods: {},
+  methods: {
+    togglePublished(item) {
+      this.$store.dispatch(IMAGE_TOGGLE_PUBLISH, {
+        id: item._id,
+        publishOption: !item.isPublished
+      });
+    }
+  },
   mounted() {
     this.$store.dispatch(IMAGES_GET);
   },
