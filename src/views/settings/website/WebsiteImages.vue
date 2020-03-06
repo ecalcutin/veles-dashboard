@@ -28,6 +28,14 @@
                               label="Категория"
                               v-model="defaultItem.category"
                             />
+                            <v-combobox
+                              v-model="defaultItem.labels"
+                              :items="labels"
+                              item-text="title"
+                              item-value="_id"
+                              label="Метки"
+                              multiple
+                            ></v-combobox>
                             <v-radio-group v-model="defaultItem.isPublished">
                               <v-radio label="Показывать" :value="true"></v-radio>
                               <v-radio label="Не показывать" :value="false"></v-radio>
@@ -79,7 +87,8 @@ export default {
       defaultItem: {
         title: "",
         category: "",
-        isPublished: false
+        isPublished: false,
+        labels: []
       }
     };
   },
@@ -105,7 +114,8 @@ export default {
       this.defaultItem = {
         title: "",
         category: "",
-        isPublished: false
+        isPublished: false,
+        labels: []
       };
     }
   },
@@ -115,6 +125,9 @@ export default {
   computed: {
     categories() {
       return this.$store.state.settings.categories;
+    },
+    labels() {
+      return this.$store.state.settings.labels;
     },
     items() {
       return this.$store.state.settings.website.images.items;

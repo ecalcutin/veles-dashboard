@@ -15,10 +15,11 @@ export default {
   },
 
   async [actionTypes.IMAGE_DATA_UPDATE]({ }, imageData) {
-    const { title, category, isPublished, _id } = imageData;
+    const { title, category, isPublished, _id, labels } = imageData;
     const response = await api.patch(`/website/images/${_id}`, {
       title,
       category,
+      labels,
       isPublished
     });
   },
