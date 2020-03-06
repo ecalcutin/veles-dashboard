@@ -1,6 +1,7 @@
 import RouteWrapper from '@/components/RouteWrapper';
 import SettingsPage from './SettingsPage';
 
+import Labels from './erp-content/Labels';
 import Categories from './erp-content/Categories';
 import Products from './erp-content/Products';
 
@@ -19,6 +20,7 @@ export default {
       component: RouteWrapper,
       children: [
         { path: 'categories', component: Categories },
+        { path: 'labels', component: Labels },
         { path: 'products', component: Products }
       ]
     },

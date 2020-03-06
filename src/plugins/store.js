@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 import UIModule from '@/store/ui';
 import SettingsModule from '@/store/settings';
 
-import { PRODUCTS_GET, CATEGORIES_GET } from '@/store/settings/action-types';
+import { PRODUCTS_GET, CATEGORIES_GET, LABELS_GET } from '@/store/settings/action-types';
 
 Vue.use(Vuex);
 
@@ -15,6 +15,7 @@ export default new Vuex.Store({
     '__APP_INIT__': ({ dispatch }) => {
       dispatch(PRODUCTS_GET);
       dispatch(CATEGORIES_GET);
+      dispatch(LABELS_GET);
     }
   },
   modules: {

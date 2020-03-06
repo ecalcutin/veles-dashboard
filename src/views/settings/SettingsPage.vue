@@ -13,6 +13,17 @@
         </v-card>
       </v-col>
       <v-col>
+        <v-card to="/dashboard/settings/erp-content/labels" min-height="150" outlined>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <div class="overline mb-4">OVERLINE</div>
+              <v-list-item-title class="headline mb-1">Метки и тэги</v-list-item-title>
+              <v-list-item-subtitle>Настроить метки и теги для продукции</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+      </v-col>
+      <v-col>
         <v-card to="/dashboard/settings/erp-content/products" min-height="150" outlined>
           <v-list-item three-line>
             <v-list-item-content>
