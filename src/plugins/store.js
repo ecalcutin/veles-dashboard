@@ -14,9 +14,9 @@ export default new Vuex.Store({
   mutations: {},
   actions: {
     '__APP_INIT__': ({ dispatch }) => {
-      dispatch(PRODUCTS_GET);
-      dispatch(CATEGORIES_GET);
-      dispatch(LABELS_GET);
+      // dispatch(PRODUCTS_GET);
+      // dispatch(CATEGORIES_GET);
+      // dispatch(LABELS_GET);
       dispatch(WebsiteCategories);
     }
   },

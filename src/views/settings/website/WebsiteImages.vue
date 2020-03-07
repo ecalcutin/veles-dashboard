@@ -124,7 +124,7 @@ export default {
   },
   computed: {
     categories() {
-      return this.$store.state.settings.categories;
+      return this.$store.state.settings.website.categories;
     },
     labels() {
       return this.$store.state.settings.labels;
