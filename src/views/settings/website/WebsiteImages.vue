@@ -3,6 +3,32 @@
     <div>
       <v-row>
         <v-col>
+          <CrudDialog @onClose="onClose" :mode="crud.mode" :opened="crud.opened">
+            <template>
+              <v-form>
+                <v-text-field label="Название" v-model="defaultItem.title" />
+                <v-select
+                  :items="categories"
+                  item-text="title"
+                  item-value="_id"
+                  label="Категория"
+                  v-model="defaultItem.category"
+                />
+                <v-combobox
+                  v-model="defaultItem.labels"
+                  :items="labels"
+                  item-text="title"
+                  item-value="_id"
+                  label="Метки"
+                  multiple
+                ></v-combobox>
+                <v-radio-group v-model="defaultItem.isPublished">
+                  <v-radio label="Показывать" :value="true"></v-radio>
+                  <v-radio label="Не показывать" :value="false"></v-radio>
+                </v-radio-group>
+              </v-form>
+            </template>
+          </CrudDialog>
           <FilesUploader />
           <v-data-iterator
             :server-items-length="totalDocs"
@@ -16,34 +42,7 @@
                   <v-card>
                     <v-img height="400" :src="`${uploads}/${item.imageURI}`"></v-img>
                     <v-card-title>{{item._id}}</v-card-title>
-                    <v-card-text>
-                      <CrudDialog @onClose="onClose" :mode="crud.mode" :opened="crud.opened">
-                        <template>
-                          <v-form>
-                            <v-text-field label="Название" v-model="defaultItem.title" />
-                            <v-select
-                              :items="categories"
-                              item-text="title"
-                              item-value="_id"
-                              label="Категория"
-                              v-model="defaultItem.category"
-                            />
-                            <v-combobox
-                              v-model="defaultItem.labels"
-                              :items="labels"
-                              item-text="title"
-                              item-value="_id"
-                              label="Метки"
-                              multiple
-                            ></v-combobox>
-                            <v-radio-group v-model="defaultItem.isPublished">
-                              <v-radio label="Показывать" :value="true"></v-radio>
-                              <v-radio label="Не показывать" :value="false"></v-radio>
-                            </v-radio-group>
-                          </v-form>
-                        </template>
-                      </CrudDialog>
-                    </v-card-text>
+                    <v-card-text></v-card-text>
                     <v-card-actions>
                       <v-spacer />
                       <v-btn @click.stop="openCrudDialog('update', item)" text>Редактировать</v-btn>
