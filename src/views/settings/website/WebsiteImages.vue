@@ -107,7 +107,6 @@ export default {
           this.$store.dispatch(IMAGE_REMOVE, this.defaultItem._id);
           break;
         case "cancel":
-          console.log("Cancelling");
           break;
       }
       this.crud.opened = false;
@@ -127,7 +126,7 @@ export default {
       return this.$store.state.settings.website.categories;
     },
     labels() {
-      return this.$store.state.settings.labels;
+      return this.$store.state.settings.website.labels;
     },
     items() {
       return this.$store.state.settings.website.images.items;
