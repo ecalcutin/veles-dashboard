@@ -14,14 +14,14 @@
                   label="Категория"
                   v-model="defaultItem.category"
                 />
-                <v-combobox
+                <v-select
                   v-model="defaultItem.labels"
                   :items="labels"
                   item-text="title"
                   item-value="_id"
                   label="Метки"
                   multiple
-                ></v-combobox>
+                ></v-select>
                 <v-radio-group v-model="defaultItem.isPublished">
                   <v-radio label="Показывать" :value="true"></v-radio>
                   <v-radio label="Не показывать" :value="false"></v-radio>
