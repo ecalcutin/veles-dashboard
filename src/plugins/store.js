@@ -5,6 +5,7 @@ import UIModule from '@/store/ui';
 import SettingsModule from '@/store/settings';
 
 import { PRODUCTS_GET, CATEGORIES_GET, LABELS_GET } from '@/store/settings/action-types';
+import { CATEGORIES_GET as WebsiteCategories } from '@/store/settings/website/action-types';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
       dispatch(PRODUCTS_GET);
       dispatch(CATEGORIES_GET);
       dispatch(LABELS_GET);
+      dispatch(WebsiteCategories);
     }
   },
   modules: {

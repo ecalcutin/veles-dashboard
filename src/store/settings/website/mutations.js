@@ -14,5 +14,10 @@ export default {
   [mutationTypes.IMAGE_PUBLISH_TOGGLED](state, item) {
     const imageIndex = state.images.items.findIndex(i => i._id === item._id);
     state.images.items.splice(imageIndex, 1);
+  },
+
+  
+  [mutationTypes.CATEGORIES_SET](state, categories) {
+    state.categories = categories;
   }
 };

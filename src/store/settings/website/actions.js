@@ -27,4 +27,25 @@ export default {
     await api.delete(`/website/images/${id}`);
     dispatch(actionTypes.IMAGES_GET);
   },
+
+  async [actionTypes.CATEGORIES_GET]({ }) {
+    const response = await api.get(`/website/categories`);
+    console.log(response);
+  },
+  async [actionTypes.CATEGORIES_GET]({ commit }) {
+    const response = await api.get(`/website/categories`);
+    commit(mutationTypes.CATEGORIES_SET, response.data);
+  },
+  async [actionTypes.CATEGORY_REMOVE]({ dispatch }, id) {
+    await api.delete(`/website/categories/${id}`);
+    dispatch(actionTypes.CATEGORIES_GET);
+  },
+  async [actionTypes.CATEGORY_CREATE]({ dispatch }, category) {
+    await api.post('/website/categories', { title: category.title });
+    dispatch(actionTypes.CATEGORIES_GET);
+  },
+  async [actionTypes.CATEGORY_UPDATE]({ dispatch }, { _id, title }) {
+    await api.patch(`/website/categories/${_id}`, { title });
+    dispatch(actionTypes.CATEGORIES_GET);
+  },
 };

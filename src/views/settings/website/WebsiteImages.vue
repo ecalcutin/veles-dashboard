@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import CrudDialog from "../erp-content/CrudDialog";
+import CrudDialog from "../CrudDialog";
 import {
   IMAGES_GET,
   IMAGE_REMOVE,

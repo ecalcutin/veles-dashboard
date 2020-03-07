@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import CrudDialog from "./CrudDialog";
+import CrudDialog from "../CrudDialog";
 import {
   CATEGORIES_GET,
   CATEGORY_REMOVE,
