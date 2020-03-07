@@ -16,7 +16,7 @@ export default {
 
   async [actionTypes.IMAGE_DATA_UPDATE]({ }, imageData) {
     const { title, category, isPublished, _id, labels } = imageData;
-    const response = await api.patch(`/website/images/${_id}`, {
+    await api.patch(`/website/images/${_id}`, {
       title,
       category,
       labels,
@@ -30,7 +30,6 @@ export default {
 
   async [actionTypes.CATEGORIES_GET]({ }) {
     const response = await api.get(`/website/categories`);
-    console.log(response);
   },
   async [actionTypes.CATEGORIES_GET]({ commit }) {
     const response = await api.get(`/website/categories`);
