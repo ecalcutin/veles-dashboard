@@ -33,34 +33,4 @@ export default {
     const response = await api.get(`/website/categories`);
     commit(mutationTypes.CATEGORIES_SET, response.data);
   },
-  async [actionTypes.CATEGORY_REMOVE]({ dispatch }, id) {
-    await api.delete(`/website/categories/${id}`);
-    dispatch(actionTypes.CATEGORIES_GET);
-  },
-  async [actionTypes.CATEGORY_CREATE]({ dispatch }, category) {
-    await api.post('/website/categories', { title: category.title });
-    dispatch(actionTypes.CATEGORIES_GET);
-  },
-  async [actionTypes.CATEGORY_UPDATE]({ dispatch }, { _id, title }) {
-    await api.patch(`/website/categories/${_id}`, { title });
-    dispatch(actionTypes.CATEGORIES_GET);
-  },
-
-  // LABELS
-  async [actionTypes.LABELS_GET]({ commit }) {
-    const response = await api.get(`/website/labels`);
-    commit(mutationTypes.LABELS_SET, response.data);
-  },
-  async [actionTypes.LABEL_REMOVE]({ dispatch }, id) {
-    await api.delete(`/website/labels/${id}`);
-    dispatch(actionTypes.LABELS_GET);
-  },
-  async [actionTypes.LABEL_CREATE]({ dispatch }, label) {
-    await api.post('/website/labels', { title: label.title });
-    dispatch(actionTypes.LABELS_GET);
-  },
-  async [actionTypes.LABEL_UPDATE]({ dispatch }, { _id, title }) {
-    await api.patch(`/website/labels/${_id}`, { title });
-    dispatch(actionTypes.LABELS_GET);
-  },
 };

@@ -9,16 +9,17 @@
                 <v-text-field label="Название" v-model="defaultItem.title" />
                 <v-select
                   :items="categories"
+                  return-object
                   item-text="title"
-                  item-value="_id"
+                  item-value="code"
                   label="Категория"
                   v-model="defaultItem.category"
                 />
                 <v-select
                   v-model="defaultItem.labels"
-                  :items="labels"
+                  :items="defaultItem.category.labels"
                   item-text="title"
-                  item-value="_id"
+                  item-value="code"
                   label="Метки"
                   multiple
                 ></v-select>
@@ -100,6 +101,7 @@ export default {
     onClose(mode) {
       switch (mode) {
         case "update":
+          console.log(this.defaultItem)
           this.$store.dispatch(IMAGE_DATA_UPDATE, this.defaultItem);
           break;
         case "remove":
