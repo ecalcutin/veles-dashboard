@@ -40,7 +40,7 @@
               <v-row>
                 <v-col v-for="item in props.items" :key="item._id" cols="12" sm="6" md="4">
                   <v-card>
-                    <v-img v-if="!isDevelopment" height="400" :src="`${uploads}/${item.imageURI}`"></v-img>
+                    <v-img v-if="!isDevelopment" height="200" :src="`${uploads}/${item.imageURI}`"></v-img>
                     <v-card-title>{{item.title || item._id}}</v-card-title>
                     <v-card-text></v-card-text>
                     <v-card-actions>
@@ -94,7 +94,7 @@ export default {
   methods: {
     openCrudDialog(mode, item) {
       this.defaultItem = Object.assign({}, item);
-      this.defaultItem.category = item.category._id;
+      this.defaultItem.category = item.category ? item.category._id : "";
       this.crud.mode = mode;
       this.crud.opened = true;
     },
