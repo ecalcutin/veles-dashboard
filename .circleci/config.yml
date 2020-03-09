@@ -1,24 +1,5 @@
 version: 2
 jobs:
-  test:
-    docker:
-      - image: circleci/node:13.8.0
-
-    working_directory: ~/veles-dashboard
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm test
   deploy-to-production:
     machine:
       enabled: true
