@@ -94,6 +94,7 @@ export default {
   methods: {
     openCrudDialog(mode, item) {
       this.defaultItem = Object.assign({}, item);
+      this.defaultItem.category = item.category._id;
       this.crud.mode = mode;
       this.crud.opened = true;
     },
