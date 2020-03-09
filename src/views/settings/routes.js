@@ -7,6 +7,7 @@ import Products from './erp-content/Products';
 
 import WebsiteImages from './website/WebsiteImages';
 import WebsiteCategories from './website/WebsiteCategories';
+import WebsiteLabels from './website/WebsiteLabels';
 
 export default {
   path: 'settings',
@@ -36,6 +37,10 @@ export default {
         {
           path: 'categories',
           component: WebsiteCategories
+        },
+        {
+          path: 'labels',
+          component: WebsiteLabels
         }
       ]
     }

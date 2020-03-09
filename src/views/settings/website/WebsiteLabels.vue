@@ -6,6 +6,13 @@
         <CrudDialog @onClose="onClose" :mode="crud.mode" :opened="crud.opened">
           <template>
             <v-form>
+              <v-select
+                v-model="defaultItem.category"
+                :items="categories"
+                item-text="title"
+                item-value="_id"
+                label="Категория"
+              ></v-select>
               <v-text-field label="Название" v-model="defaultItem.title" />
             </v-form>
           </template>
@@ -49,7 +56,7 @@ export default {
       },
       defaultItem: {
         title: "",
-        image: null
+        category: ""
       },
       headers: [
         { text: "UUID", value: "_id", sortable: false },
@@ -61,6 +68,9 @@ export default {
   computed: {
     items() {
       return this.$store.state.settings.website.labels;
+    },
+    categories() {
+      return this.$store.state.settings.website.categories;
     }
   },
   methods: {
@@ -85,7 +95,8 @@ export default {
       }
       this.crud.opened = false;
       this.defaultItem = {
-        title: ""
+        title: "",
+        category: ""
       };
     }
   }

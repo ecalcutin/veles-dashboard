@@ -47,9 +47,21 @@ export default {
   async [actionTypes.CATEGORY_REMOVE]({ commit }, _id) {
     const response = await api.delete(`/website/categories/${_id}`);
   },
+
   // LALEBS
   async [actionTypes.LABELS_GET]({ commit }) {
     const response = await api.get(`/website/labels`);
     commit(mutationTypes.LABELS_SET, response.data);
+  },
+  async [actionTypes.LABEL_CREATE]({ commit }, label) {
+    const response = await api.post(`/website/labels`, label);
+  },
+  async [actionTypes.LABEL_UPDATE]({ commit }, labelData) {
+    const { _id } = labelData;
+    delete labelData._id;
+    const response = await api.patch(`/website/labels/${_id}`, labelData);
+  },
+  async [actionTypes.LABEL_REMOVE]({ commit }, _id) {
+    const response = await api.delete(`/website/labels/${_id}`);
   }
 };
