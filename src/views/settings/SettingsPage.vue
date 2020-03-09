@@ -35,7 +35,7 @@
         </v-card>
       </v-col> -->
       <v-col xs="12" md="4">
-        <v-card to="/dashboard/settings/website/categories" min-height="150" outlined>
+        <v-card to="/settings/website/categories" min-height="150" outlined>
           <v-list-item three-line>
             <v-list-item-content>
               <div class="overline mb-4">Вебсайт</div>
@@ -46,7 +46,7 @@
         </v-card>
       </v-col>
       <v-col xs="12" md="4">
-        <v-card to="/dashboard/settings/website/labels" min-height="150" outlined>
+        <v-card to="/settings/website/labels" min-height="150" outlined>
           <v-list-item three-line>
             <v-list-item-content>
               <div class="overline mb-4">Вебсайт</div>
@@ -57,7 +57,7 @@
         </v-card>
       </v-col>
       <v-col xs="12" md="4">
-        <v-card to="/dashboard/settings/website/images" min-height="150" outlined>
+        <v-card to="/settings/website/images" min-height="150" outlined>
           <v-list-item three-line>
             <v-list-item-content>
               <div class="overline mb-4">Вебсайт</div>
