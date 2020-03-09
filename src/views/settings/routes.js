@@ -6,6 +6,7 @@ import Categories from './erp-content/Categories';
 import Products from './erp-content/Products';
 
 import WebsiteImages from './website/WebsiteImages';
+import WebsiteCategories from './website/WebsiteCategories';
 
 export default {
   path: 'settings',
@@ -32,6 +33,10 @@ export default {
           path: 'images',
           component: WebsiteImages
         },
+        {
+          path: 'categories',
+          component: WebsiteCategories
+        }
       ]
     }
   ]

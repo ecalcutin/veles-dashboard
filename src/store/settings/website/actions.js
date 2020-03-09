@@ -23,8 +23,8 @@ export default {
       isPublished
     });
   },
-  async [actionTypes.IMAGE_REMOVE]({ dispatch }, id) {
-    await api.delete(`/website/images/${id}`);
+  async [actionTypes.IMAGE_REMOVE]({ dispatch }, _id) {
+    await api.delete(`/website/images/${_id}`);
     dispatch(actionTypes.IMAGES_GET);
   },
 
@@ -32,6 +32,20 @@ export default {
   async [actionTypes.CATEGORIES_GET]({ commit }) {
     const response = await api.get(`/website/categories`);
     commit(mutationTypes.CATEGORIES_SET, response.data);
+  },
+  async [actionTypes.CATEGORY_CREATE]({ commit }, category) {
+    const response = await api.post(`/website/categories`, category);
+  },
+  async [actionTypes.CATEGORY_UPDATE]({ commit }, categoryData) {
+    const { _id } = categoryData;
+    delete categoryData._id;
+    const response = await api.patch(
+      `/website/categories/${_id}`,
+      categoryData
+    );
+  },
+  async [actionTypes.CATEGORY_REMOVE]({ commit }, _id) {
+    const response = await api.delete(`/website/categories/${_id}`);
   },
   // LALEBS
   async [actionTypes.LABELS_GET]({ commit }) {
