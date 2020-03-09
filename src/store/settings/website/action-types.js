@@ -3,3 +3,4 @@ export const IMAGE_DATA_UPDATE = '[WEBSITE] - IMAGE/UPDATE';
 export const IMAGE_REMOVE = '[WEBSITE] - IMAGE/REMOVE';
 
 export const CATEGORIES_GET = '[WEBSITE] - CATEGORIES/GET';
+export const LABELS_GET = '[WEBSITE] - LABELS/GET';

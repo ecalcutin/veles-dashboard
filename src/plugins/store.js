@@ -18,6 +18,7 @@ export default new Vuex.Store({
       // dispatch(CATEGORIES_GET);
       // dispatch(LABELS_GET);
       dispatch(WebsiteCategories);
+      dispatch(WebsiteLabels);
     }
   },
   modules: {

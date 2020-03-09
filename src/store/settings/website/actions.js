@@ -14,7 +14,7 @@ export default {
     commit(mutationTypes.IMAGES_SET, { images, totalDocs });
   },
 
-  async [actionTypes.IMAGE_DATA_UPDATE]({ }, imageData) {
+  async [actionTypes.IMAGE_DATA_UPDATE]({}, imageData) {
     const { title, category, isPublished, _id, labels } = imageData;
     await api.patch(`/website/images/${_id}`, {
       title,
@@ -33,4 +33,9 @@ export default {
     const response = await api.get(`/website/categories`);
     commit(mutationTypes.CATEGORIES_SET, response.data);
   },
+  // LALEBS
+  async [actionTypes.LABELS_GET]({ commit }) {
+    const response = await api.get(`/website/labels`);
+    commit(mutationTypes.LABELS_SET, response.data);
+  }
 };

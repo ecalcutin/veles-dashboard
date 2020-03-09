@@ -9,17 +9,16 @@
                 <v-text-field label="Название" v-model="defaultItem.title" />
                 <v-select
                   :items="categories"
-                  return-object
                   item-text="title"
-                  item-value="code"
+                  item-value="_id"
                   label="Категория"
                   v-model="defaultItem.category"
                 />
                 <v-select
                   v-model="defaultItem.labels"
-                  :items="defaultItem.category.labels"
+                  :items="labels"
                   item-text="title"
-                  item-value="code"
+                  item-value="_id"
                   label="Метки"
                   multiple
                 ></v-select>
@@ -41,8 +40,8 @@
               <v-row>
                 <v-col v-for="item in props.items" :key="item._id" cols="12" sm="6" md="4">
                   <v-card>
-                    <v-img height="400" :src="`${uploads}/${item.imageURI}`"></v-img>
-                    <v-card-title>{{item._id}}</v-card-title>
+                    <v-img v-if="!isDevelopment" height="400" :src="`${uploads}/${item.imageURI}`"></v-img>
+                    <v-card-title>{{item.title || item._id}}</v-card-title>
                     <v-card-text></v-card-text>
                     <v-card-actions>
                       <v-spacer />
@@ -101,7 +100,6 @@ export default {
     onClose(mode) {
       switch (mode) {
         case "update":
-          console.log(this.defaultItem)
           this.$store.dispatch(IMAGE_DATA_UPDATE, this.defaultItem);
           break;
         case "remove":
@@ -156,6 +154,9 @@ export default {
     },
     uploads() {
       return process.env.VUE_APP_UPLOADS;
+    },
+    isDevelopment() {
+      return process.env.NODE_ENV === "development";
     }
   }
 };
