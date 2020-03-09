@@ -10,5 +10,13 @@ export default {
   },
   [mutationTypes.PAGE_LIMIT_SET](state, limit) {
     state.products.pagination.itemsPerPage = limit;
+  },
+
+  [mutationTypes.CATEGORIES_SET](state, categories) {
+    state.categories = categories;
+  },
+
+  [mutationTypes.LABELS_SET](state, labels) {
+    state.labels = labels;
   }
 };

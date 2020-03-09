@@ -1,10 +1,13 @@
 import RouteWrapper from '@/components/RouteWrapper';
 import SettingsPage from './SettingsPage';
 
+import Labels from './erp-content/Labels';
 import Categories from './erp-content/Categories';
 import Products from './erp-content/Products';
 
 import WebsiteImages from './website/WebsiteImages';
+import WebsiteCategories from './website/WebsiteCategories';
+import WebsiteLabels from './website/WebsiteLabels';
 
 export default {
   path: 'settings',
@@ -19,6 +22,7 @@ export default {
       component: RouteWrapper,
       children: [
         { path: 'categories', component: Categories },
+        { path: 'labels', component: Labels },
         { path: 'products', component: Products }
       ]
     },
@@ -29,6 +33,14 @@ export default {
         {
           path: 'images',
           component: WebsiteImages
+        },
+        {
+          path: 'categories',
+          component: WebsiteCategories
+        },
+        {
+          path: 'labels',
+          component: WebsiteLabels
         }
       ]
     }

@@ -6,6 +6,7 @@ import mutations from './mutations';
 export default {
   state: {
     categories: [],
+    labels: [],
     products: {
       items: [],
       pagination: {

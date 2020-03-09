@@ -26,5 +26,31 @@ export default {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
     dispatch(actionTypes.PRODUCTS_GET);
-  }
+  },
+
+  async [actionTypes.CATEGORIES_GET]({ commit }) {
+    const response = await api.get(`/tags/categories`);
+    commit(mutationTypes.CATEGORIES_SET, response.data);
+  },
+  async [actionTypes.CATEGORY_REMOVE]({ dispatch }, id) {
+    await api.delete(`/tags/categories/${id}`);
+    dispatch(actionTypes.CATEGORIES_GET);
+  },
+  async [actionTypes.CATEGORY_CREATE]({ dispatch }, category) {
+    await api.post('/tags/categories', { title: category.title });
+    dispatch(actionTypes.CATEGORIES_GET);
+  },
+
+  async [actionTypes.LABELS_GET]({ commit }) {
+    const response = await api.get(`/tags/labels`);
+    commit(mutationTypes.LABELS_SET, response.data);
+  },
+  async [actionTypes.LABEL_REMOVE]({ dispatch }, id) {
+    await api.delete(`/tags/labels/${id}`);
+    dispatch(actionTypes.LABELS_GET);
+  },
+  async [actionTypes.LABEL_CREATE]({ dispatch }, label) {
+    await api.post('/tags/labels', { title: label.title });
+    dispatch(actionTypes.LABELS_GET);
+  },
 };

@@ -6,18 +6,19 @@
         <CrudDialog @onClose="onClose" :mode="crud.mode" :opened="crud.opened">
           <template>
             <v-form>
-              <v-text-field label="Артикул" v-model="defaultItem.title" />
+              <v-select
+                v-model="defaultItem.category"
+                :items="categories"
+                item-text="title"
+                item-value="_id"
+                label="Категория"
+              ></v-select>
+              <v-text-field label="Название" v-model="defaultItem.title" />
             </v-form>
           </template>
         </CrudDialog>
       </v-toolbar>
-      <v-data-table
-        :headers="headers"
-        :server-items-length="totalDocs"
-        :items-per-page.sync="itemsPerPage"
-        :page.sync="page"
-        :items="items"
-      >
+      <v-data-table :items="items" :headers="headers">
         <template v-slot:item="row">
           <tr>
             <td>{{row.item._id}}</td>
@@ -37,16 +38,13 @@
 <script>
 import CrudDialog from "../CrudDialog";
 import {
-  PRODUCTS_GET,
-  PRODUCT_REMOVE,
-  PRODUCT_CREATE
-} from "@/store/settings/action-types";
-import {
-  PAGE_LIMIT_SET,
-  PAGE_INDEX_SET
-} from "@/store/settings/mutation-types";
+  LABELS_GET,
+  LABEL_REMOVE,
+  LABEL_UPDATE,
+  LABEL_CREATE
+} from "@/store/settings/website/action-types";
 export default {
-  name: "Products",
+  name: "WebsiteLabels",
   components: {
     CrudDialog
   },
@@ -58,7 +56,7 @@ export default {
       },
       defaultItem: {
         title: "",
-        image: null
+        category: ""
       },
       headers: [
         { text: "UUID", value: "_id", sortable: false },
@@ -67,8 +65,13 @@ export default {
       ]
     };
   },
-  mounted() {
-    this.$store.dispatch(PRODUCTS_GET);
+  computed: {
+    items() {
+      return this.$store.state.settings.website.labels;
+    },
+    categories() {
+      return this.$store.state.settings.website.categories;
+    }
   },
   methods: {
     openCrudDialog(mode, item) {
@@ -79,48 +82,22 @@ export default {
     onClose(mode) {
       switch (mode) {
         case "create":
-          this.$store.dispatch(PRODUCT_CREATE, this.defaultItem);
+          this.$store.dispatch(LABEL_CREATE, this.defaultItem);
           break;
         case "update":
-          console.log("Updating: ", this.defaultItem);
+          this.$store.dispatch(LABEL_UPDATE, this.defaultItem);
           break;
         case "remove":
-          this.$store.dispatch(PRODUCT_REMOVE, this.defaultItem._id);
+          this.$store.dispatch(LABEL_REMOVE, this.defaultItem._id);
           break;
         case "cancel":
-          console.log("Cancelling");
           break;
       }
       this.crud.opened = false;
       this.defaultItem = {
         title: "",
+        category: ""
       };
-    }
-  },
-  computed: {
-    items() {
-      return this.$store.state.settings.products.items;
-    },
-    totalDocs() {
-      return this.$store.state.settings.products.pagination.totalDocs;
-    },
-    page: {
-      get() {
-        return this.$store.state.settings.products.pagination.page;
-      },
-      set(index) {
-        this.$store.commit(PAGE_INDEX_SET, index);
-        this.$store.dispatch(PRODUCTS_GET);
-      }
-    },
-    itemsPerPage: {
-      get() {
-        return this.$store.state.settings.products.pagination.itemsPerPage;
-      },
-      set(limit) {
-        this.$store.commit(PAGE_LIMIT_SET, limit);
-        this.$store.dispatch(PRODUCTS_GET);
-      }
     }
   }
 };
