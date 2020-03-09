@@ -12,10 +12,9 @@ const routes = [
   {
     path: '',
     component: RouteWrapper,
-    redirect: 'dashboard',
     children: [
       {
-        path: 'dashboard',
+        path: '',
         component: AuthorizedLayout,
         children: [SettingsRoutes]
       }
