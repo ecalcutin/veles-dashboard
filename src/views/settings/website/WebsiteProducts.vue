@@ -10,7 +10,7 @@
                 <v-select
                   :items="categories"
                   item-text="title"
-                  item-value="_id"
+                  item-value="code"
                   label="Категория"
                   v-model="defaultItem.category"
                 />
@@ -18,7 +18,7 @@
                   v-model="defaultItem.labels"
                   :items="labels"
                   item-text="title"
-                  item-value="_id"
+                  item-value="code"
                   label="Метки"
                   multiple
                 ></v-select>
@@ -85,7 +85,10 @@ export default {
       },
       defaultItem: {
         title: "",
-        category: "",
+        category: {
+          title: "",
+          code: ""
+        },
         isPublished: false,
         labels: []
       }
@@ -94,14 +97,16 @@ export default {
   methods: {
     openCrudDialog(mode, item) {
       this.defaultItem = Object.assign({}, item);
-      this.defaultItem.category = item.category ? item.category._id : "";
+      console.log(this.defaultItem);
       this.crud.mode = mode;
       this.crud.opened = true;
     },
     onClose(mode) {
       switch (mode) {
         case "update":
-          this.$store.dispatch(PRODUCT_DATA_UPDATE, this.defaultItem);
+          let $update = Object.assign({}, this.defaultItem);
+          console.log("UPD: ", $update);
+          this.$store.dispatch(PRODUCT_DATA_UPDATE, $update);
           break;
         case "remove":
           this.$store.dispatch(PRODUCT_REMOVE, this.defaultItem._id);
@@ -112,7 +117,10 @@ export default {
       this.crud.opened = false;
       this.defaultItem = {
         title: "",
-        category: "",
+        category: {
+          title: "",
+          code: ""
+        },
         isPublished: false,
         labels: []
       };
@@ -126,7 +134,12 @@ export default {
       return this.$store.state.settings.website.categories;
     },
     labels() {
-      return this.$store.state.settings.website.labels;
+      const $code = this.defaultItem.category;
+      if ($code) {
+        const category = this.categories.find(c => c.code === $code);
+        return category?.labels;
+      }
+      return [];
     },
     items() {
       return this.$store.state.settings.website.products.items;
