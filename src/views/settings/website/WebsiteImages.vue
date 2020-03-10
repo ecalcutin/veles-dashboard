@@ -55,7 +55,7 @@
             <template v-slot:footer>
               <v-pagination
                 v-model="page"
-                :length="parseInt(`${(itemsPerPage === -1 ?  totalDocs : totalDocs / itemsPerPage + 1 )}`, 10)"
+                :length="parseInt(`${(itemsPerPage === -1 ?  totalDocs : totalDocs / itemsPerPage )}`, 10)"
               ></v-pagination>
             </template>
           </v-data-iterator>
