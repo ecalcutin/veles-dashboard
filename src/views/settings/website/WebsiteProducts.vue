@@ -10,15 +10,16 @@
                 <v-select
                   :items="categories"
                   item-text="title"
-                  item-value="_id"
+                  item-value="code"
                   label="Категория"
+                  @change="categoryChange"
                   v-model="defaultItem.category"
                 />
                 <v-select
                   v-model="defaultItem.labels"
                   :items="labels"
                   item-text="title"
-                  item-value="_id"
+                  item-value="code"
                   label="Метки"
                   multiple
                 ></v-select>
@@ -41,7 +42,7 @@
               <v-row>
                 <v-col v-for="item in props.items" :key="item._id" cols="12" sm="6" md="4">
                   <v-card>
-                    <v-img v-if="!isDevelopment" contain :src="`${uploads}/${item.imageURI}`"></v-img>
+                    <v-img height="200" :src="`${uploads}/${item.imageURI}`"></v-img>
                     <v-card-title>{{item.title || item._id}}</v-card-title>
                     <v-card-text></v-card-text>
                     <v-card-actions>
@@ -69,9 +70,9 @@
 <script>
 import CrudDialog from "../CrudDialog";
 import {
-  IMAGES_GET,
-  IMAGE_REMOVE,
-  IMAGE_DATA_UPDATE
+  PRODUCTS_GET,
+  PRODUCT_REMOVE,
+  PRODUCT_DATA_UPDATE
 } from "@/store/settings/website/action-types";
 import {
   PAGE_LIMIT_SET,
@@ -79,7 +80,7 @@ import {
 } from "@/store/settings/website/mutation-types";
 import FilesUploader from "./FilesUploader";
 export default {
-  name: "WebsiteImages",
+  name: "WebsiteProducts",
   components: {
     FilesUploader,
     CrudDialog
@@ -93,26 +94,32 @@ export default {
       },
       defaultItem: {
         title: "",
-        category: "",
+        category: {
+          title: "",
+          code: ""
+        },
         isPublished: false,
         labels: []
       }
     };
   },
   methods: {
+    categoryChange() {
+      this.defaultItem.labels = [];
+    },
     openCrudDialog(mode, item) {
       this.defaultItem = Object.assign({}, item);
-      this.defaultItem.category = item.category ? item.category._id : "";
       this.crud.mode = mode;
       this.crud.opened = true;
     },
     onClose(mode) {
       switch (mode) {
         case "update":
-          this.$store.dispatch(IMAGE_DATA_UPDATE, this.defaultItem);
+          let $update = Object.assign({}, this.defaultItem);
+          this.$store.dispatch(PRODUCT_DATA_UPDATE, $update);
           break;
         case "remove":
-          this.$store.dispatch(IMAGE_REMOVE, this.defaultItem._id);
+          this.$store.dispatch(PRODUCT_REMOVE, this.defaultItem._id);
           break;
         case "cancel":
           break;
@@ -120,48 +127,56 @@ export default {
       this.crud.opened = false;
       this.defaultItem = {
         title: "",
-        category: "",
+        category: {
+          title: "",
+          code: ""
+        },
         isPublished: false,
         labels: []
       };
     }
   },
   mounted() {
-    this.$store.dispatch(IMAGES_GET);
+    this.$store.dispatch(PRODUCTS_GET);
   },
   computed: {
     categories() {
       return this.$store.state.settings.website.categories;
     },
     labels() {
-      return this.$store.state.settings.website.labels;
+      const $code = this.defaultItem.category;
+      if ($code) {
+        const category = this.categories.find(c => c.code === $code);
+        return category?.labels;
+      }
+      return [];
     },
     items() {
-      return this.$store.state.settings.website.images.items;
+      return this.$store.state.settings.website.products.items;
     },
     totalDocs() {
-      return this.$store.state.settings.website.images.pagination.totalDocs;
+      return this.$store.state.settings.website.products.pagination.totalDocs;
     },
     totalPages() {
       return this.$store.state.settings.website.images.pagination.totalPages;
     },
     page: {
       get() {
-        return this.$store.state.settings.website.images.pagination.page;
+        return this.$store.state.settings.website.products.pagination.page;
       },
       set(index) {
         this.$store.commit(PAGE_INDEX_SET, index);
-        this.$store.dispatch(IMAGES_GET);
+        this.$store.dispatch(PRODUCTS_GET);
       }
     },
     itemsPerPage: {
       get() {
-        return this.$store.state.settings.website.images.pagination
+        return this.$store.state.settings.website.products.pagination
           .itemsPerPage;
       },
       set(limit) {
         this.$store.commit(PAGE_LIMIT_SET, limit);
-        this.$store.dispatch(IMAGES_GET);
+        this.$store.dispatch(PRODUCTS_GET);
       }
     },
     uploads() {

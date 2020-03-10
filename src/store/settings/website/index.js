@@ -4,8 +4,7 @@ import mutations from './mutations';
 export default {
   state: {
     categories: [],
-    labels: [],
-    images: {
+    products: {
       items: [],
       pagination: {
         itemsPerPage: 9,
