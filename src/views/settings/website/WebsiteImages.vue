@@ -38,9 +38,9 @@
           >
             <template v-slot:default="props">
               <v-row>
-                <v-col v-for="item in props.items" :key="item._id" cols="12" sm="6" md="4">
+                <v-col v-for="item in props.items" :key="item._id" cols="12" sm="6" md="3">
                   <v-card>
-                    <v-img v-if="!isDevelopment" height="200" :src="`${uploads}/${item.imageURI}`"></v-img>
+                    <v-img v-if="!isDevelopment" contain :src="`${uploads}/${item.imageURI}`"></v-img>
                     <v-card-title>{{item.title || item._id}}</v-card-title>
                     <v-card-text></v-card-text>
                     <v-card-actions>
