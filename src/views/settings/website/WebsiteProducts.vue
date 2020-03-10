@@ -101,7 +101,6 @@ export default {
     },
     openCrudDialog(mode, item) {
       this.defaultItem = Object.assign({}, item);
-      console.log(this.defaultItem);
       this.crud.mode = mode;
       this.crud.opened = true;
     },
@@ -109,7 +108,6 @@ export default {
       switch (mode) {
         case "update":
           let $update = Object.assign({}, this.defaultItem);
-          console.log("UPD: ", $update);
           this.$store.dispatch(PRODUCT_DATA_UPDATE, $update);
           break;
         case "remove":
