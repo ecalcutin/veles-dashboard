@@ -57,7 +57,7 @@
               <v-pagination
                 v-if="totalPages !== 1"
                 v-model="page"
-                :length="parseInt(`${(itemsPerPage === -1 ?  1 : totalDocs / itemsPerPage )}`, 10)"
+                :length="parseInt(`${(itemsPerPage === -1 ?  1 : totalDocs / itemsPerPage + 1 )}`, 10)"
               ></v-pagination>
             </template>
           </v-data-iterator>
@@ -158,7 +158,7 @@ export default {
       return this.$store.state.settings.website.products.pagination.totalDocs;
     },
     totalPages() {
-      return this.$store.state.settings.website.images.pagination.totalPages;
+      return this.$store.state.settings.website.products.pagination.totalPages;
     },
     page: {
       get() {
