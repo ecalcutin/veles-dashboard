@@ -11,7 +11,8 @@ export default {
     );
     const images = response.data.docs;
     const totalDocs = response.data.totalDocs;
-    commit(mutationTypes.IMAGES_SET, { images, totalDocs });
+    const totalPages = response.data.totalPages;
+    commit(mutationTypes.IMAGES_SET, { images, totalDocs, totalPages });
   },
 
   async [actionTypes.IMAGE_DATA_UPDATE]({}, imageData) {

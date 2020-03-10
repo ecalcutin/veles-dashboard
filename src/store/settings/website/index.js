@@ -9,6 +9,7 @@ export default {
       items: [],
       pagination: {
         itemsPerPage: 9,
+        totalPages: 0,
         totalDocs: 0,
         page: 1
       }

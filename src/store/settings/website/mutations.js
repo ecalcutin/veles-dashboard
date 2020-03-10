@@ -1,9 +1,10 @@
 import * as mutationTypes from './mutation-types';
 
 export default {
-  [mutationTypes.IMAGES_SET](state, { images, totalDocs }) {
+  [mutationTypes.IMAGES_SET](state, { images, totalDocs, totalPages }) {
     state.images.items = images;
     state.images.pagination.totalDocs = totalDocs;
+    state.images.pagination.totalPages = totalPages;
   },
   [mutationTypes.PAGE_INDEX_SET](state, page) {
     state.images.pagination.page = page;
