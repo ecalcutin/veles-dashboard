@@ -4,7 +4,6 @@
       <v-row align="center">
         <v-col class="flex-grow-1">
           <v-file-input
-            :rules="rules"
             chips
             accept="image/*"
             show-size
@@ -15,7 +14,7 @@
           ></v-file-input>
         </v-col>
         <v-col class="flex-grow-0">
-          <v-btn :disabled="files.length === 0 || files.length > 10" @click="upload">Загрузить</v-btn>
+          <v-btn :disabled="files.length === 0" @click="upload">Загрузить</v-btn>
         </v-col>
       </v-row>
     </v-form>
@@ -31,8 +30,7 @@ export default {
     return {
       files: [],
       uploading: false,
-      progress: 0,
-      rules: [v => (v.length <= 10 ? true : "Слишком много файлов")]
+      progress: 0
     };
   },
   methods: {
