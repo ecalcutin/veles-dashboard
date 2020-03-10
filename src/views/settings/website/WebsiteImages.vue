@@ -35,10 +35,11 @@
             :items-per-page.sync="itemsPerPage"
             :page.sync="page"
             :items="items"
+            :footer-props="{'items-per-page-options': [9, 18, -1], 'items-per-page-all-text': 'Все'}"
           >
             <template v-slot:default="props">
               <v-row>
-                <v-col v-for="item in props.items" :key="item._id" cols="12" sm="6" md="3">
+                <v-col v-for="item in props.items" :key="item._id" cols="12" sm="6" md="4">
                   <v-card>
                     <v-img v-if="!isDevelopment" contain :src="`${uploads}/${item.imageURI}`"></v-img>
                     <v-card-title>{{item.title || item._id}}</v-card-title>
@@ -50,6 +51,12 @@
                   </v-card>
                 </v-col>
               </v-row>
+            </template>
+            <template v-slot:footer>
+              <v-pagination
+                v-model="page"
+                :length="parseInt(`${(itemsPerPage === -1 ?  totalDocs : totalDocs / itemsPerPage + 1 )}`, 10)"
+              ></v-pagination>
             </template>
           </v-data-iterator>
         </v-col>

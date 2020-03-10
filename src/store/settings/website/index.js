@@ -8,7 +8,7 @@ export default {
     images: {
       items: [],
       pagination: {
-        itemsPerPage: 10,
+        itemsPerPage: 9,
         totalDocs: 0,
         page: 1
       }
