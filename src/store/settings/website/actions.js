@@ -4,28 +4,28 @@ import * as actionTypes from './action-types';
 import * as mutationTypes from './mutation-types';
 
 export default {
-  async [actionTypes.IMAGES_GET]({ commit, state }) {
-    const { itemsPerPage, page } = state.images.pagination;
+  async [actionTypes.PRODUCTS_GET]({ commit, state }) {
+    const { itemsPerPage, page } = state.products.pagination;
     const response = await api.get(
-      `/website/images?limit=${itemsPerPage}&page=${page}`
+      `/website/products?limit=${itemsPerPage}&page=${page}`
     );
-    const images = response.data.docs;
+    const products = response.data.docs;
     const totalDocs = response.data.totalDocs;
-    commit(mutationTypes.IMAGES_SET, { images, totalDocs });
+    commit(mutationTypes.PRODUCTS_SET, { products, totalDocs });
   },
 
-  async [actionTypes.IMAGE_DATA_UPDATE]({}, imageData) {
-    const { title, category, isPublished, _id, labels } = imageData;
-    await api.patch(`/website/images/${_id}`, {
+  async [actionTypes.PRODUCT_DATA_UPDATE]({}, productData) {
+    const { title, category, isPublished, _id, labels } = productData;
+    await api.patch(`/website/products/${_id}`, {
       title,
       category,
       labels,
       isPublished
     });
   },
-  async [actionTypes.IMAGE_REMOVE]({ dispatch }, _id) {
-    await api.delete(`/website/images/${_id}`);
-    dispatch(actionTypes.IMAGES_GET);
+  async [actionTypes.PRODUCT_REMOVE]({ dispatch }, _id) {
+    await api.delete(`/website/products/${_id}`);
+    dispatch(actionTypes.PRODUCTS_GET);
   },
 
   // CATEGORIES

@@ -57,12 +57,12 @@
         </v-card>
       </v-col>
       <v-col xs="12" md="4">
-        <v-card to="/settings/website/images" min-height="150" outlined>
+        <v-card to="/settings/website/products" min-height="150" outlined>
           <v-list-item three-line>
             <v-list-item-content>
               <div class="overline mb-4">Вебсайт</div>
-              <v-list-item-title class="headline mb-1">Изображения</v-list-item-title>
-              <v-list-item-subtitle>Добавьте изображения на сайт с описанием</v-list-item-subtitle>
+              <v-list-item-title class="headline mb-1">Продукция</v-list-item-title>
+              <v-list-item-subtitle>Добавьте продукцию на сайт с описанием</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-card>

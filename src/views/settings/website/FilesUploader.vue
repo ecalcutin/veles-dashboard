@@ -43,7 +43,7 @@ export default {
         formData.append(`images`, this.files[i]);
       }
       api
-        .post("/website/images", formData, {
+        .post("/website/products", formData, {
           headers: { "Content-Type": "multipart/form-data" },
           onUploadProgress: progressEvent => {
             this.progress = Math.round(

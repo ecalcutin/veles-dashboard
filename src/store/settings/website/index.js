@@ -5,7 +5,7 @@ export default {
   state: {
     categories: [],
     labels: [],
-    images: {
+    products: {
       items: [],
       pagination: {
         itemsPerPage: 10,

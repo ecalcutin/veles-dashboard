@@ -5,7 +5,7 @@ import Labels from './erp-content/Labels';
 import Categories from './erp-content/Categories';
 import Products from './erp-content/Products';
 
-import WebsiteImages from './website/WebsiteImages';
+import WebsiteProducts from './website/WebsiteProducts';
 import WebsiteCategories from './website/WebsiteCategories';
 import WebsiteLabels from './website/WebsiteLabels';
 
@@ -31,8 +31,8 @@ export default {
       component: RouteWrapper,
       children: [
         {
-          path: 'images',
-          component: WebsiteImages
+          path: 'products',
+          component: WebsiteProducts
         },
         {
           path: 'categories',
