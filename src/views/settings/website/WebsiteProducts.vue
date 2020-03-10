@@ -12,6 +12,7 @@
                   item-text="title"
                   item-value="code"
                   label="Категория"
+                  @change="categoryChange"
                   v-model="defaultItem.category"
                 />
                 <v-select
@@ -95,6 +96,9 @@ export default {
     };
   },
   methods: {
+    categoryChange() {
+      this.defaultItem.labels = [];
+    },
     openCrudDialog(mode, item) {
       this.defaultItem = Object.assign({}, item);
       console.log(this.defaultItem);
