@@ -1,9 +1,10 @@
 import * as mutationTypes from './mutation-types';
 
 export default {
-  [mutationTypes.PRODUCTS_SET](state, { products, totalDocs }) {
+  [mutationTypes.PRODUCTS_SET](state, { products, totalDocs, totalPages }) {
     state.products.items = products;
     state.products.pagination.totalDocs = totalDocs;
+    state.products.pagination.totalPages = totalPages;
   },
   [mutationTypes.PAGE_INDEX_SET](state, page) {
     state.products.pagination.page = page;

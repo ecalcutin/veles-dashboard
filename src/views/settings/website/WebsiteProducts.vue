@@ -53,12 +53,8 @@
                 </v-col>
               </v-row>
             </template>
-            <template v-slot:footer>
-              <v-pagination
-                v-if="totalPages !== 1"
-                v-model="page"
-                :length="parseInt(`${(itemsPerPage === -1 ?  1 : totalDocs / itemsPerPage + 1 )}`, 10)"
-              ></v-pagination>
+            <template v-if="totalPages > 1" v-slot:footer>
+              <v-pagination v-model="page" :length="totalPages"></v-pagination>
             </template>
           </v-data-iterator>
         </v-col>

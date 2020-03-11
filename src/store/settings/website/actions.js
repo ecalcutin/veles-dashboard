@@ -11,7 +11,8 @@ export default {
     );
     const products = response.data.docs;
     const totalDocs = response.data.totalDocs;
-    commit(mutationTypes.PRODUCTS_SET, { products, totalDocs });
+    const totalPages = response.data.totalPages;
+    commit(mutationTypes.PRODUCTS_SET, { products, totalDocs, totalPages });
   },
 
   async [actionTypes.PRODUCT_DATA_UPDATE]({}, productData) {
